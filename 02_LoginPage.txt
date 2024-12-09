@@ -1,0 +1,73 @@
+
+### **Login functionality Testsuit (Collection of Test case) Overview Teacher has given examples**
+
+#******************** Settings ************************
+
+*** Settings ***
+
+Documentation	Testing the login functionality. Login Test scenario with valid and invalid credentials.
+
+Pre Condition	Open Browser
+Post Condition	Close All Browsers
+Tags	Login, TS-1-Login (e.g. For Agile Jira project management issue reference)
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+# Here Test Data defined as a Variable for easy access
+
+LoginUrl= https://gitlab.com/users/sign_in
+UserName= XYZ
+Password= ***
+Invalid_Username= XYZZZ
+Invalid_Password= ******
+Empty= 
+
+#******************** Test Cases *************************
+
+*** Test Cases ***
+
+# Positive Tests
+
+Login With Valid Credential
+    Navigate To Login Page  LoginUrl
+    Input Username  UserName
+    Input Password  Password
+    Submit Login Form
+    Verify Page Should Contain Welcome page	  
+    
+
+# Negative Tests
+	
+Login With Invalid Credential
+    Navigate To Login Page  LoginUrl
+    Input Username  UserName
+    Input Password  Invalid_Password
+    Submit Login Form
+    Verify Page Should Contain Invalid login or password.	  
+    	
+
+Error message Should Be Visible After Invalid Login With Empty And Space
+    Navigate To Login Page  LoginUrl
+    Input Username    Empty
+    Input Password    Empty
+    Submit Login Form
+    Verify That Error message should show This field is required
+    
+
+Error message Should Be Visible After Invalid Login With Valid Username And Invalid Password
+    Navigate To Login Page  LoginUrl
+    Input Username    UserName
+    Input Password    Invalid_Password
+    Submit Login Form
+    Verify Page Should Contain Invalid login or password.
+    
+Error message Should Be Visible After Invalid Login With Invalid Username And Valid Password
+    Navigate To Login Page  LoginUrl
+    Input Username    Invalid_Username
+    Input Password    Password
+    Submit Login Form
+    Verify Page Should Contain Invalid login or password.
+        

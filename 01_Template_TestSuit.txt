@@ -1,0 +1,33 @@
+
+### **Test Suit (Collection of Test case) Overview**
+
+### TODO: When you see this `TODO:` text please consider it as the task to perform on that test or bug report file.
+
+
+#*********************** Settings **************************
+
+*** Settings ***
+
+Documentation	Here, you can describe the Test Suit description.
+
+Pre Condition 	Runs before each Test Case 
+Post Condition	Runs after each Test Case
+Tags
+
+#*********************** Common Variables *******************
+
+*** Variables ***
+
+# Here, you can define Test Data as a variable 
+
+VARIABLE_NAME =    variable value
+
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+Test Case-1 Name
+    Process Step One
+    Step Two    TestData
+    Verification or Validation Steps With Expected Data	   

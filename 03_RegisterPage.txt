@@ -1,0 +1,133 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+
+# TODO: Write Documentation e.g. User Registration Test scenario with verification, valid and invalid credentials.
+
+Documentation	Testing the registration with multiple variations of usernames, passwords, emails, etc.
+
+# TODO: Write Precondition, Postcondition, Tags
+
+Pre Condition	Open Browser
+Post Condition	Close All Browsers
+Tags			Registration		
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+# TODO: Write Registration field variables
+
+LoginUrl = https://gitlab.com/users/sign_up
+First Name= 				John
+Last Name=					Doe
+Valid Username= 			TestiKayttaja
+Valid Email=				****to15@gmail.com
+Valid Password=				****
+Invalid Email=				testiemail
+Invalid Username=			öööäää
+Invalid Password=			tooshort
+Existing Email=				Valid Email
+Existing Username=			Valid Username
+Empty Field= 				EMPTY
+
+
+
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# TODO: Write Positive and Negative Test Cases and Test Process steps (Think about possible test cases)
+
+# Positive Test examples are below write test process steps for each below test case
+
+	Register user with valid username and password 
+	- Remember credentials which you are going to use for whole application testing 
+
+# Negative Test examples keywords are below write test process steps for each below test case 
+
+	Register user with same above username,
+		...empty password,
+		...invalid email,
+		...Without recaptcha,
+
+
+# Positive Test Cases
+
+Register with valid credentials
+	Navigate to registration page	LoginUrl
+	Input first name				First Name
+	Input last name					Last Name			
+	Input username					Valid Username
+	Input email						Valid Email
+	Input password					Valid Password
+	Submit registration form
+	Verify page						
+	Input verification code			Verification Code
+	Verify email address			Complete
+	Landing page					"Welcome to GitLab, John!"
+
+# Negative Test Cases
+
+Register with invalid email
+	Navigate to registration page	LoginUrl
+	Input first name				First Name
+	Input last name					Last Name			
+	Input username					Valid Username
+	Input email						Invalid Email
+	Input password					Valid Password
+	Registration page				"Please provide a valid email address."
+
+Register with invalid password
+	Navigate to registration page	LoginUrl
+	Input first name				First Name
+	Input last name					Last Name			
+	Input username					Valid Username
+	Input email						Valid Email
+	Input password					Invalid Password
+	Registration page				"Minimum length is 8 characters."
+
+Register with empty password
+	Navigate to registration page	LoginUrl
+	Input first name				First Name
+	Input last name					Last Name			
+	Input username					Valid Username
+	Input email						Valid Email
+	Input password					Empty
+	Registration page				"Minimum length is 8 characters."
+
+Register with missing fields
+	Navigate to registration page	LoginUrl
+	Input first name				Empty
+	Input last name					Empty			
+	Input username					Empty
+	Input email						EmptyR
+	Input password					Empty
+	Registration page first name	"This field is required."
+	Registration page last name		"This field is required."
+	Registration page username		"Username is too short (minimum is 2 characters)."
+	Registration page email			"Please provide a valid email address."
+	Registration page password		"Minimum length is 8 characters."
+
+Register with existing username		
+	Navigate to registration page	LoginUrl
+	Input first name				First Name
+	Input last name					Last Name			
+	Input username					Existing Username
+	Input email						Valid Email
+	Input password					Valid Password
+	Registration page				"Username is already taken."
+
+
+Register with existing email	
+	Navigate to registration page	LoginUrl
+	Input first name				First Name
+	Input last name					Last Name			
+	Input username					Valid Username
+	Input email						Existing Email
+	Input password					Valid Password
+	Registration page				"Email has already been taken."
